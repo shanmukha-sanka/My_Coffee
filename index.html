@@ -10,16 +10,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --obsidian:#17120F;
-    --umber:#2B2019;
-    --umber-light:#3A2C22;
-    --ember:#BA5A2E;
-    --ember-bright:#D97A3F;
-    --gold:#D4A24E;
-    --ash:#F3EAE0;
-    --ash-dim:#B8A997;
-    --ash-faint:#7A6C5D;
-    --hairline: rgba(243,234,224,0.12);
+    --obsidian:#1A120B;
+    --umber:#2E1B10;
+    --umber-light:#442712;
+    --ember:#D2551E;
+    --ember-bright:#F2793B;
+    --gold:#F0B23E;
+    --rose:#E85D6B;
+    --forest:#4C8C5A;
+    --plum:#8C4B8C;
+    --sky:#3E9BB8;
+    --ash:#FFF3E2;
+    --ash-dim:#E0C5A8;
+    --ash-faint:#B08F6E;
+    --hairline: rgba(255,243,226,0.14);
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -130,8 +134,9 @@
     position:absolute;
     inset:0;
     background:
-      radial-gradient(ellipse 900px 500px at 78% 15%, rgba(186,90,46,0.22), transparent 60%),
-      radial-gradient(ellipse 700px 500px at 15% 90%, rgba(212,162,78,0.10), transparent 60%);
+      radial-gradient(ellipse 900px 550px at 80% 10%, rgba(242,121,59,0.35), transparent 60%),
+      radial-gradient(ellipse 750px 550px at 10% 95%, rgba(232,93,107,0.18), transparent 60%),
+      radial-gradient(ellipse 600px 500px at 50% 50%, rgba(240,178,62,0.08), transparent 65%);
     pointer-events:none;
   }
   .ember-field{
@@ -215,12 +220,14 @@
     border:1px solid transparent;
   }
   .btn-solid{
-    background:var(--ember);
+    background:linear-gradient(135deg, var(--ember), var(--rose));
     color:var(--ash);
+    box-shadow:0 6px 20px rgba(210,85,30,0.35);
   }
   .btn-solid:hover{
-    background:var(--ember-bright);
+    background:linear-gradient(135deg, var(--ember-bright), var(--rose));
     transform:translateY(-2px);
+    box-shadow:0 10px 26px rgba(210,85,30,0.45);
   }
   .btn-ghost{
     border-color:var(--hairline);
@@ -263,6 +270,24 @@
     .hero-stat-panel{border-left:none;border-top:1px solid var(--hairline);padding-left:0;padding-top:24px;}
   }
 
+  .hero-art{
+    width:100%;
+    max-width:420px;
+    margin-bottom:36px;
+    filter:drop-shadow(0 20px 40px rgba(0,0,0,0.35));
+  }
+  .steam-line{
+    animation:steam 4s ease-in-out infinite;
+    transform-origin:center bottom;
+  }
+  .steam-line:nth-child(2){animation-delay:0.6s;}
+  .steam-line:nth-child(3){animation-delay:1.2s;}
+  @keyframes steam{
+    0%{opacity:0; transform:translateY(0) scaleY(0.8);}
+    30%{opacity:0.8;}
+    100%{opacity:0; transform:translateY(-18px) scaleY(1.3);}
+  }
+
   /* ---------- SECTION SCAFFOLD ---------- */
   section{
     padding:120px 0;
@@ -280,7 +305,7 @@
     font-size:0.78rem;
     text-transform:uppercase;
     letter-spacing:0.16em;
-    color:var(--ember-bright);
+    color:var(--tag-color, var(--ember-bright));
     margin-bottom:14px;
     display:block;
   }
@@ -310,9 +335,20 @@
   .origin-card{
     background:var(--umber);
     padding:40px 32px;
-    transition:background 0.3s ease;
+    transition:background 0.3s ease, transform 0.3s ease;
+    border-top:4px solid var(--card-accent, var(--ember));
+    position:relative;
   }
-  .origin-card:hover{background:var(--umber-light);}
+  .origin-card:hover{background:var(--umber-light); transform:translateY(-4px);}
+  .origin-card .icon-badge{
+    width:52px;height:52px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:color-mix(in srgb, var(--card-accent, var(--ember)) 22%, transparent);
+    margin-bottom:20px;
+  }
   .origin-card .num{
     font-family:'JetBrains Mono',monospace;
     font-size:0.78rem;
@@ -380,6 +416,14 @@
     display:flex;
     align-items:center;
     gap:14px;
+  }
+  .menu-icon{
+    width:38px;height:38px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
   }
   .menu-desc{
     color:var(--ash-faint);
@@ -567,6 +611,62 @@
           <a href="#origin" class="btn btn-ghost">Where it grows</a>
         </div>
       </div>
+      <div>
+        <svg class="hero-art" viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8C4B8C"/>
+              <stop offset="45%" stop-color="#E85D6B"/>
+              <stop offset="100%" stop-color="#F0B23E"/>
+            </linearGradient>
+            <linearGradient id="volcGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3E2417"/>
+              <stop offset="100%" stop-color="#1A120B"/>
+            </linearGradient>
+            <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#F0B23E" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#F0B23E" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- sky -->
+          <rect x="0" y="0" width="420" height="230" rx="10" fill="url(#skyGrad)"/>
+          <circle cx="300" cy="90" r="70" fill="url(#sunGlow)"/>
+          <circle cx="300" cy="90" r="30" fill="#FFF3E2" opacity="0.9"/>
+
+          <!-- volcano -->
+          <path d="M0,230 L110,90 L150,140 L190,70 L260,230 Z" fill="url(#volcGrad)"/>
+          <path d="M175,90 C185,80 195,80 205,92 C210,80 225,80 232,95" fill="none" stroke="#F2793B" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+          <circle cx="190" cy="70" r="9" fill="#F2793B"/>
+
+          <!-- steam puffs from volcano -->
+          <g class="steam-line" opacity="0.7"><ellipse cx="188" cy="52" rx="10" ry="16" fill="#FFF3E2"/></g>
+          <g class="steam-line" opacity="0.5"><ellipse cx="205" cy="42" rx="8" ry="13" fill="#FFF3E2"/></g>
+
+          <!-- ground / table -->
+          <rect x="0" y="230" width="420" height="20" fill="#2E1B10"/>
+          <rect x="0" y="248" width="420" height="92" fill="#1A120B"/>
+
+          <!-- coffee cup -->
+          <g transform="translate(150,235)">
+            <path d="M10,0 L110,0 L102,70 C100,82 90,90 78,90 L42,90 C30,90 20,82 18,70 Z" fill="#F0B23E"/>
+            <ellipse cx="60" cy="2" rx="50" ry="9" fill="#5C3317"/>
+            <ellipse cx="60" cy="2" rx="40" ry="6" fill="#2E1B10"/>
+            <path d="M110,12 C132,12 132,48 110,48" fill="none" stroke="#F0B23E" stroke-width="9" stroke-linecap="round"/>
+            <!-- rising steam from cup -->
+            <g class="steam-line" opacity="0.8"><path d="M45,-6 C40,-16 50,-22 45,-32" fill="none" stroke="#FFF3E2" stroke-width="3" stroke-linecap="round"/></g>
+            <g class="steam-line" opacity="0.6"><path d="M65,-6 C60,-18 70,-24 65,-34" fill="none" stroke="#FFF3E2" stroke-width="3" stroke-linecap="round"/></g>
+            <g class="steam-line" opacity="0.7"><path d="M85,-6 C80,-16 90,-22 85,-32" fill="none" stroke="#FFF3E2" stroke-width="3" stroke-linecap="round"/></g>
+          </g>
+
+          <!-- scattered beans -->
+          <ellipse cx="40" cy="310" rx="9" ry="6" fill="#5C3317" transform="rotate(-20 40 310)"/>
+          <ellipse cx="60" cy="322" rx="9" ry="6" fill="#3E2417" transform="rotate(15 60 322)"/>
+          <ellipse cx="355" cy="305" rx="9" ry="6" fill="#5C3317" transform="rotate(30 355 305)"/>
+          <ellipse cx="378" cy="320" rx="9" ry="6" fill="#3E2417" transform="rotate(-10 378 320)"/>
+        </svg>
+      </div>
+
       <div class="hero-stat-panel">
         <div class="label">Elevation range</div>
         <div class="value">1,400<span>–2,200m</span></div>
@@ -581,13 +681,16 @@
     <div class="wrap">
       <div class="section-head">
         <div>
-          <span class="section-tag">Where it comes from</span>
+          <span class="section-tag" style="--tag-color:#3E9BB8;">Where it comes from</span>
           <h2>Three volcanoes, three cups.</h2>
         </div>
         <p>Volcanic soil is porous and mineral-dense — it drains fast and feeds the plant hard, which is exactly what gives these beans their weight.</p>
       </div>
       <div class="origin-grid">
-        <div class="origin-card">
+        <div class="origin-card" style="--card-accent:#3E9BB8;">
+          <div class="icon-badge">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 6 9 6 14C6 17.3 8.7 20 12 20C15.3 20 18 17.3 18 14C18 9 12 2 12 2Z" fill="#3E9BB8"/></svg>
+          </div>
           <span class="num">01 / Antigua</span>
           <span class="region">Guatemala</span>
           <h3>Fuego Slopes</h3>
@@ -598,7 +701,10 @@
             <div><b>Washed</b>Process</div>
           </div>
         </div>
-        <div class="origin-card">
+        <div class="origin-card" style="--card-accent:#4C8C5A;">
+          <div class="icon-badge">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 6 9 6 14C6 17.3 8.7 20 12 20C15.3 20 18 17.3 18 14C18 9 12 2 12 2Z" fill="#F0B23E"/></svg>
+          </div>
           <span class="num">02 / Yirgacheffe</span>
           <span class="region">Ethiopia</span>
           <h3>Gedeb Highlands</h3>
@@ -609,7 +715,10 @@
             <div><b>Natural</b>Process</div>
           </div>
         </div>
-        <div class="origin-card">
+        <div class="origin-card" style="--card-accent:#E85D6B;">
+          <div class="icon-badge">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 6 9 6 14C6 17.3 8.7 20 12 20C15.3 20 18 17.3 18 14C18 9 12 2 12 2Z" fill="#E85D6B"/></svg>
+          </div>
           <span class="num">03 / Ijen</span>
           <span class="region">Indonesia</span>
           <h3>Java Highlands</h3>
@@ -629,7 +738,7 @@
     <div class="wrap">
       <div class="section-head">
         <div>
-          <span class="section-tag">On the counter</span>
+          <span class="section-tag" style="--tag-color:#F0B23E;">On the counter</span>
           <h2>The menu.</h2>
         </div>
         <p>Roast level shown in dots — light to dark. Every drink can be made with any of our three origins.</p>
@@ -638,7 +747,9 @@
 
         <div class="menu-row">
           <div>
-            <div class="menu-name">Pour Over
+            <div class="menu-name">
+              <span class="menu-icon" style="background:rgba(62,155,184,0.2);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 8H18L16.5 19C16.3 20.1 15.3 21 14.1 21H9.9C8.7 21 7.7 20.1 7.5 19L6 8Z" stroke="#3E9BB8" stroke-width="1.6"/><path d="M9 8V5C9 3.9 9.9 3 11 3H13C14.1 3 15 3.9 15 5V8" stroke="#3E9BB8" stroke-width="1.6"/></svg></span>
+              Pour Over
               <span class="roast-dots"><span class="on"></span><span class="on"></span><span></span><span></span></span>
             </div>
             <div class="menu-desc">Single cup, brewed to order. Choose your origin.</div>
@@ -649,7 +760,9 @@
 
         <div class="menu-row">
           <div>
-            <div class="menu-name">Bloom Espresso
+            <div class="menu-name">
+              <span class="menu-icon" style="background:rgba(210,85,30,0.2);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="12" rx="6" ry="9" fill="#D2551E"/><path d="M12 3V21" stroke="#1A120B" stroke-width="1.4"/></svg></span>
+              Bloom Espresso
               <span class="roast-dots"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></span>
             </div>
             <div class="menu-desc">Our house blend — Antigua and Ijen, co-roasted.</div>
@@ -660,7 +773,9 @@
 
         <div class="menu-row">
           <div>
-            <div class="menu-name">Flat White
+            <div class="menu-name">
+              <span class="menu-icon" style="background:rgba(240,178,62,0.22);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 9H16L15 18C14.9 19.1 14 20 12.9 20H8.1C7 20 6.1 19.1 6 18L5 9Z" fill="#F0B23E"/><path d="M16 11C18.5 11 18.5 15 16 15" stroke="#F0B23E" stroke-width="1.8"/></svg></span>
+              Flat White
               <span class="roast-dots"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></span>
             </div>
             <div class="menu-desc">Steamed milk, tight microfoam, house espresso.</div>
@@ -671,7 +786,9 @@
 
         <div class="menu-row">
           <div>
-            <div class="menu-name">Cold Brew
+            <div class="menu-name">
+              <span class="menu-icon" style="background:rgba(76,140,90,0.22);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 4H17L15.5 20H8.5L7 4Z" stroke="#4C8C5A" stroke-width="1.6"/><path d="M8.5 13H15.5" stroke="#4C8C5A" stroke-width="1.6"/></svg></span>
+              Cold Brew
               <span class="roast-dots"><span class="on"></span><span></span><span></span><span></span></span>
             </div>
             <div class="menu-desc">Yirgacheffe, steeped 18 hours. Bright and floral.</div>
@@ -682,7 +799,9 @@
 
         <div class="menu-row">
           <div>
-            <div class="menu-name">Piccolo
+            <div class="menu-name">
+              <span class="menu-icon" style="background:rgba(232,93,107,0.2);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 10H18L17 19C16.8 20.1 15.9 21 14.8 21H9.2C8.1 21 7.2 20.1 7 19L6 10Z" fill="#E85D6B"/></svg></span>
+              Piccolo
               <span class="roast-dots"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></span>
             </div>
             <div class="menu-desc">A short, strong macchiato-sized flat white.</div>
@@ -693,7 +812,9 @@
 
         <div class="menu-row">
           <div>
-            <div class="menu-name">Beans to Go
+            <div class="menu-name">
+              <span class="menu-icon" style="background:rgba(140,75,140,0.2);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><ellipse cx="9" cy="12" rx="4" ry="6" fill="#8C4B8C" transform="rotate(-20 9 12)"/><ellipse cx="16" cy="12" rx="4" ry="6" fill="#5C3317" transform="rotate(15 16 12)"/></svg></span>
+              Beans to Go
               <span class="roast-dots"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></span>
             </div>
             <div class="menu-desc">250g bag, any origin, ground or whole bean.</div>
@@ -711,7 +832,7 @@
     <div class="wrap">
       <div class="section-head">
         <div>
-          <span class="section-tag">The roast</span>
+          <span class="section-tag" style="--tag-color:#E85D6B;">The roast</span>
           <h2>Every batch, tracked by hand.</h2>
         </div>
         <p>We log bean temperature every fifteen seconds from charge to drop. This is the actual curve from this week's Antigua batch.</p>
@@ -770,7 +891,7 @@
   <section id="visit">
     <div class="wrap visit-grid">
       <div>
-        <span class="section-tag">Come by</span>
+        <span class="section-tag" style="--tag-color:#4C8C5A;">Come by</span>
         <h2 style="margin-bottom:30px;">Visit the roastery.</h2>
         <div class="addr-block">
           <div class="label">Address</div>
