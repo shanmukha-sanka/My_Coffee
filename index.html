@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashfall Coffee Co. — Grown in Fire, Roasted with Care</title>
+<meta name="description" content="Ashfall Coffee Co. sources single-origin coffee from volcanic soil regions and roasts every batch in small drums, tracked by hand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --obsidian:#17120F;
+    --umber:#2B2019;
+    --umber-light:#3A2C22;
+    --ember:#BA5A2E;
+    --ember-bright:#D97A3F;
+    --gold:#D4A24E;
+    --ash:#F3EAE0;
+    --ash-dim:#B8A997;
+    --ash-faint:#7A6C5D;
+    --hairline: rgba(243,234,224,0.12);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--obsidian);
+    color:var(--ash);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  .mono{
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:0.03em;
+  }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  :focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    padding:22px 0;
+    background:linear-gradient(to bottom, rgba(23,18,15,0.92), rgba(23,18,15,0));
+    backdrop-filter:blur(2px);
+  }
+  header .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:1.15rem;
+    letter-spacing:0.01em;
+  }
+  .brand-mark{
+    width:28px;height:28px;
+    flex-shrink:0;
+  }
+  nav ul{
+    display:flex;
+    gap:36px;
+    list-style:none;
+  }
+  nav a{
+    font-size:0.92rem;
+    color:var(--ash-dim);
+    transition:color 0.2s ease;
+    position:relative;
+  }
+  nav a:hover{color:var(--ash);}
+  nav a::after{
+    content:'';
+    position:absolute;
+    left:0; bottom:-6px;
+    width:0; height:1px;
+    background:var(--ember-bright);
+    transition:width 0.25s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .nav-toggle{display:none;}
+
+  @media (max-width:760px){
+    nav ul{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:140px 0 100px;
+    overflow:hidden;
+  }
+  .hero-glow{
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 78% 15%, rgba(186,90,46,0.22), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 15% 90%, rgba(212,162,78,0.10), transparent 60%);
+    pointer-events:none;
+  }
+  .ember-field{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .ember-spark{
+    position:absolute;
+    bottom:-10px;
+    width:3px;height:3px;
+    border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 6px 1px rgba(212,162,78,0.8);
+    opacity:0;
+    animation:rise 9s linear infinite;
+  }
+  @keyframes rise{
+    0%{transform:translateY(0) translateX(0); opacity:0;}
+    8%{opacity:0.9;}
+    90%{opacity:0.5;}
+    100%{transform:translateY(-100vh) translateX(20px); opacity:0;}
+  }
+
+  .hero-inner{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:60px;
+    align-items:end;
+  }
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:var(--ember-bright);
+    font-size:0.8rem;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    margin-bottom:28px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px;height:1px;
+    background:var(--ember-bright);
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 6vw, 5.2rem);
+    line-height:1.02;
+    color:var(--ash);
+    max-width:11ch;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--ember-bright);
+  }
+  .hero-sub{
+    margin-top:28px;
+    max-width:38ch;
+    color:var(--ash-dim);
+    font-size:1.05rem;
+  }
+  .hero-cta{
+    margin-top:40px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:14px 26px;
+    border-radius:2px;
+    font-size:0.92rem;
+    font-weight:500;
+    transition:all 0.25s ease;
+    border:1px solid transparent;
+  }
+  .btn-solid{
+    background:var(--ember);
+    color:var(--ash);
+  }
+  .btn-solid:hover{
+    background:var(--ember-bright);
+    transform:translateY(-2px);
+  }
+  .btn-ghost{
+    border-color:var(--hairline);
+    color:var(--ash-dim);
+  }
+  .btn-ghost:hover{
+    border-color:var(--ash-dim);
+    color:var(--ash);
+  }
+
+  .hero-stat-panel{
+    border-left:1px solid var(--hairline);
+    padding-left:32px;
+    padding-bottom:6px;
+  }
+  .hero-stat-panel .label{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--ash-faint);
+    margin-bottom:6px;
+  }
+  .hero-stat-panel .value{
+    font-family:'Fraunces',serif;
+    font-size:2.6rem;
+    font-weight:500;
+    color:var(--gold);
+    line-height:1;
+    margin-bottom:22px;
+  }
+  .hero-stat-panel .value span{
+    font-size:1.1rem;
+    color:var(--ash-faint);
+    font-family:'Inter',sans-serif;
+    font-weight:400;
+  }
+
+  @media (max-width:900px){
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-stat-panel{border-left:none;border-top:1px solid var(--hairline);padding-left:0;padding-top:24px;}
+  }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{
+    padding:120px 0;
+    position:relative;
+  }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:40px;
+    margin-bottom:64px;
+    flex-wrap:wrap;
+  }
+  .section-tag{
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    color:var(--ember-bright);
+    margin-bottom:14px;
+    display:block;
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem,3.4vw,2.6rem);
+    max-width:16ch;
+  }
+  .section-head p{
+    color:var(--ash-dim);
+    max-width:34ch;
+    font-size:0.98rem;
+  }
+
+  /* ---------- ORIGIN ---------- */
+  .origin{
+    background:var(--umber);
+    border-top:1px solid var(--hairline);
+    border-bottom:1px solid var(--hairline);
+  }
+  .origin-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:2px;
+    background:var(--hairline);
+    border:1px solid var(--hairline);
+  }
+  .origin-card{
+    background:var(--umber);
+    padding:40px 32px;
+    transition:background 0.3s ease;
+  }
+  .origin-card:hover{background:var(--umber-light);}
+  .origin-card .num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.78rem;
+    color:var(--ash-faint);
+    margin-bottom:22px;
+    display:block;
+  }
+  .origin-card h3{
+    font-size:1.3rem;
+    color:var(--ash);
+    margin-bottom:6px;
+    font-weight:500;
+  }
+  .origin-card .region{
+    color:var(--gold);
+    font-size:0.85rem;
+    margin-bottom:18px;
+    display:block;
+  }
+  .origin-card p{
+    color:var(--ash-dim);
+    font-size:0.92rem;
+  }
+  .origin-meta{
+    display:flex;
+    gap:20px;
+    margin-top:22px;
+    flex-wrap:wrap;
+  }
+  .origin-meta div{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.72rem;
+    color:var(--ash-faint);
+  }
+  .origin-meta div b{
+    color:var(--ash-dim);
+    display:block;
+    font-size:0.9rem;
+    margin-bottom:2px;
+  }
+
+  @media (max-width:860px){
+    .origin-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- MENU ---------- */
+  .menu-list{
+    display:flex;
+    flex-direction:column;
+  }
+  .menu-row{
+    display:grid;
+    grid-template-columns:2fr 1fr auto;
+    gap:24px;
+    align-items:center;
+    padding:26px 0;
+    border-bottom:1px solid var(--hairline);
+  }
+  .menu-row:first-child{border-top:1px solid var(--hairline);}
+  .menu-name{
+    font-family:'Fraunces',serif;
+    font-size:1.3rem;
+    font-weight:500;
+    color:var(--ash);
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .menu-desc{
+    color:var(--ash-faint);
+    font-size:0.88rem;
+    margin-top:6px;
+    font-family:'Inter',sans-serif;
+  }
+  .roast-dots{
+    display:inline-flex;
+    gap:4px;
+    align-items:center;
+  }
+  .roast-dots span{
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--hairline);
+  }
+  .roast-dots span.on{background:var(--ember-bright);}
+  .menu-notes{
+    color:var(--ash-dim);
+    font-size:0.85rem;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .menu-price{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--gold);
+    font-size:1.05rem;
+    text-align:right;
+    white-space:nowrap;
+  }
+
+  @media (max-width:640px){
+    .menu-row{grid-template-columns:1fr;gap:6px;}
+    .menu-price{text-align:left;}
+  }
+
+  /* ---------- ROAST CURVE (signature) ---------- */
+  .process{
+    background:var(--umber);
+    border-top:1px solid var(--hairline);
+    border-bottom:1px solid var(--hairline);
+  }
+  .curve-panel{
+    background:var(--obsidian);
+    border:1px solid var(--hairline);
+    padding:44px;
+    display:grid;
+    grid-template-columns:1fr 260px;
+    gap:40px;
+  }
+  .curve-panel svg{width:100%;height:auto;display:block;}
+  .curve-readout{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+  .curve-readout .stat b{
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    color:var(--gold);
+    font-size:1.6rem;
+  }
+  .curve-readout .stat span{
+    font-size:0.74rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--ash-faint);
+  }
+  .curve-legend{
+    display:flex;
+    gap:18px;
+    margin-top:18px;
+    flex-wrap:wrap;
+  }
+  .curve-legend div{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.76rem;
+    color:var(--ash-dim);
+    font-family:'JetBrains Mono',monospace;
+  }
+  .curve-legend i{
+    width:14px;height:2px;
+    display:inline-block;
+  }
+
+  @media (max-width:820px){
+    .curve-panel{grid-template-columns:1fr;}
+  }
+
+  /* ---------- VISIT ---------- */
+  .visit-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+  }
+  .hours-row{
+    display:flex;
+    justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid var(--hairline);
+    font-size:0.95rem;
+  }
+  .hours-row span:first-child{color:var(--ash-dim);}
+  .hours-row span:last-child{font-family:'JetBrains Mono',monospace;color:var(--ash);}
+  .addr-block{margin-bottom:30px;}
+  .addr-block .label{
+    font-size:0.74rem;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--ash-faint);
+    margin-bottom:8px;
+  }
+  .addr-block .val{font-size:1.05rem;color:var(--ash);}
+
+  @media (max-width:800px){
+    .visit-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:56px 0 40px;
+    border-top:1px solid var(--hairline);
+  }
+  .footer-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+  .footer-row .brand{font-size:1rem;}
+  .footer-links{
+    display:flex;
+    gap:28px;
+    list-style:none;
+    font-size:0.85rem;
+    color:var(--ash-faint);
+  }
+  .footer-fine{
+    margin-top:30px;
+    color:var(--ash-faint);
+    font-size:0.78rem;
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <svg class="brand-mark" viewBox="0 0 28 28" fill="none">
+        <path d="M6 12C6 12 8 8 14 8C20 8 22 12 22 12" stroke="#D4A24E" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M8 12H20L18.5 22C18.3 23.1 17.3 24 16.2 24H11.8C10.7 24 9.7 23.1 9.5 22L8 12Z" stroke="#F3EAE0" stroke-width="1.4"/>
+        <path d="M20 13.5C20 13.5 23 13.8 23 16.5C23 19 20 19.2 20 19.2" stroke="#BA5A2E" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      Ashfall Coffee Co.
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#origin">Origin</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#process">Roast</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="ember-field" id="emberField"></div>
+    <div class="wrap hero-inner">
+      <div>
+        <div class="eyebrow">Single-origin · Small-batch · Melbourne</div>
+        <h1>Grown in fire,<br><em>roasted</em> with care.</h1>
+        <p class="hero-sub">We source coffee only from volcanic soil regions — Guatemala, Ethiopia, Java — where mineral-rich ash gives every cup its structure. Every batch is roasted in-house, twelve kilos at a time.</p>
+        <div class="hero-cta">
+          <a href="#menu" class="btn btn-solid">See the menu</a>
+          <a href="#origin" class="btn btn-ghost">Where it grows</a>
+        </div>
+      </div>
+      <div class="hero-stat-panel">
+        <div class="label">Elevation range</div>
+        <div class="value">1,400<span>–2,200m</span></div>
+        <div class="label">Roasted this week</div>
+        <div class="value">86<span>kg</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGIN -->
+  <section class="origin" id="origin">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="section-tag">Where it comes from</span>
+          <h2>Three volcanoes, three cups.</h2>
+        </div>
+        <p>Volcanic soil is porous and mineral-dense — it drains fast and feeds the plant hard, which is exactly what gives these beans their weight.</p>
+      </div>
+      <div class="origin-grid">
+        <div class="origin-card">
+          <span class="num">01 / Antigua</span>
+          <span class="region">Guatemala</span>
+          <h3>Fuego Slopes</h3>
+          <p>Grown on the ash-fall terraces of an active volcano. Cocoa, red apple, a walnut finish.</p>
+          <div class="origin-meta">
+            <div><b>1,600m</b>Elevation</div>
+            <div><b>Bourbon</b>Varietal</div>
+            <div><b>Washed</b>Process</div>
+          </div>
+        </div>
+        <div class="origin-card">
+          <span class="num">02 / Yirgacheffe</span>
+          <span class="region">Ethiopia</span>
+          <h3>Gedeb Highlands</h3>
+          <p>High-altitude heirloom coffee grown in nutrient-rich volcanic loam. Jasmine, bergamot, stone fruit.</p>
+          <div class="origin-meta">
+            <div><b>2,000m</b>Elevation</div>
+            <div><b>Heirloom</b>Varietal</div>
+            <div><b>Natural</b>Process</div>
+          </div>
+        </div>
+        <div class="origin-card">
+          <span class="num">03 / Ijen</span>
+          <span class="region">Indonesia</span>
+          <h3>Java Highlands</h3>
+          <p>Grown in the shadow of an active sulfur crater. Dark chocolate, tobacco, low acidity, heavy body.</p>
+          <div class="origin-meta">
+            <div><b>1,400m</b>Elevation</div>
+            <div><b>Typica</b>Varietal</div>
+            <div><b>Wet-hulled</b>Process</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="section-tag">On the counter</span>
+          <h2>The menu.</h2>
+        </div>
+        <p>Roast level shown in dots — light to dark. Every drink can be made with any of our three origins.</p>
+      </div>
+      <div class="menu-list">
+
+        <div class="menu-row">
+          <div>
+            <div class="menu-name">Pour Over
+              <span class="roast-dots"><span class="on"></span><span class="on"></span><span></span><span></span></span>
+            </div>
+            <div class="menu-desc">Single cup, brewed to order. Choose your origin.</div>
+          </div>
+          <div class="menu-notes">4 min brew · V60</div>
+          <div class="menu-price">$6.50</div>
+        </div>
+
+        <div class="menu-row">
+          <div>
+            <div class="menu-name">Ashfall Espresso
+              <span class="roast-dots"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></span>
+            </div>
+            <div class="menu-desc">Our house blend — Antigua and Ijen, co-roasted.</div>
+          </div>
+          <div class="menu-notes">Double shot</div>
+          <div class="menu-price">$4.80</div>
+        </div>
+
+        <div class="menu-row">
+          <div>
+            <div class="menu-name">Flat White
+              <span class="roast-dots"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></span>
+            </div>
+            <div class="menu-desc">Steamed milk, tight microfoam, house espresso.</div>
+          </div>
+          <div class="menu-notes">150ml</div>
+          <div class="menu-price">$5.20</div>
+        </div>
+
+        <div class="menu-row">
+          <div>
+            <div class="menu-name">Cold Brew
+              <span class="roast-dots"><span class="on"></span><span></span><span></span><span></span></span>
+            </div>
+            <div class="menu-desc">Yirgacheffe, steeped 18 hours. Bright and floral.</div>
+          </div>
+          <div class="menu-notes">Steeped 18h</div>
+          <div class="menu-price">$6.00</div>
+        </div>
+
+        <div class="menu-row">
+          <div>
+            <div class="menu-name">Piccolo
+              <span class="roast-dots"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></span>
+            </div>
+            <div class="menu-desc">A short, strong macchiato-sized flat white.</div>
+          </div>
+          <div class="menu-notes">90ml</div>
+          <div class="menu-price">$4.50</div>
+        </div>
+
+        <div class="menu-row">
+          <div>
+            <div class="menu-name">Beans to Go
+              <span class="roast-dots"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></span>
+            </div>
+            <div class="menu-desc">250g bag, any origin, ground or whole bean.</div>
+          </div>
+          <div class="menu-notes">Roasted weekly</div>
+          <div class="menu-price">$18.00</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ROAST CURVE / PROCESS -->
+  <section class="process" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="section-tag">The roast</span>
+          <h2>Every batch, tracked by hand.</h2>
+        </div>
+        <p>We log bean temperature every fifteen seconds from charge to drop. This is the actual curve from this week's Antigua batch.</p>
+      </div>
+
+      <div class="curve-panel">
+        <svg viewBox="0 0 640 320" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Roast temperature curve from charge to drop, rising from 180 to 205 degrees Celsius over 11 minutes">
+          <!-- gridlines -->
+          <g stroke="rgba(243,234,224,0.08)" stroke-width="1">
+            <line x1="50" y1="40" x2="50" y2="270"/>
+            <line x1="50" y1="270" x2="610" y2="270"/>
+            <line x1="50" y1="200" x2="610" y2="200"/>
+            <line x1="50" y1="130" x2="610" y2="130"/>
+            <line x1="50" y1="60" x2="610" y2="60"/>
+          </g>
+          <!-- axis labels -->
+          <g fill="#7A6C5D" font-family="JetBrains Mono, monospace" font-size="11">
+            <text x="20" y="274">150</text>
+            <text x="20" y="204">175</text>
+            <text x="20" y="134">200</text>
+            <text x="20" y="64">225°C</text>
+            <text x="50" y="292">0:00</text>
+            <text x="290" y="292">6:00</text>
+            <text x="560" y="292">11:00</text>
+          </g>
+          <!-- first crack marker -->
+          <line x1="430" y1="40" x2="430" y2="270" stroke="#BA5A2E" stroke-width="1" stroke-dasharray="3 4"/>
+          <text x="437" y="52" fill="#D97A3F" font-family="JetBrains Mono, monospace" font-size="11">1st crack</text>
+
+          <!-- roast curve -->
+          <path d="M50,255 C 130,248 180,225 230,195 C 290,158 330,140 380,118 C 420,100 460,85 520,68 C 555,58 585,52 605,48"
+                fill="none" stroke="#D4A24E" stroke-width="2.5" stroke-linecap="round"/>
+
+          <!-- gas/airflow reference (flat-ish) -->
+          <path d="M50,230 C 150,225 250,220 350,215 C 450,208 520,200 605,190"
+                fill="none" stroke="#7A6C5D" stroke-width="1.5" stroke-dasharray="2 5"/>
+
+          <!-- drop point -->
+          <circle cx="605" cy="48" r="4.5" fill="#D97A3F"/>
+        </svg>
+
+        <div class="curve-readout">
+          <div class="stat"><b>11:20</b><span>Total roast time</span></div>
+          <div class="stat"><b>203°C</b><span>Drop temperature</span></div>
+          <div class="stat"><b>+8.4%</b><span>Weight loss</span></div>
+          <div class="curve-legend">
+            <div><i style="background:#D4A24E"></i>Bean temp</div>
+            <div><i style="background:#7A6C5D"></i>Airflow ref.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section id="visit">
+    <div class="wrap visit-grid">
+      <div>
+        <span class="section-tag">Come by</span>
+        <h2 style="margin-bottom:30px;">Visit the roastery.</h2>
+        <div class="addr-block">
+          <div class="label">Address</div>
+          <div class="val">14 Kiln Street, Fitzroy VIC 3065</div>
+        </div>
+        <div class="addr-block">
+          <div class="label">Contact</div>
+          <div class="val">hello@ashfallcoffee.com · (03) 9555 0142</div>
+        </div>
+        <a href="#top" class="btn btn-solid">Get directions</a>
+      </div>
+      <div>
+        <div class="hours-row"><span>Monday – Friday</span><span>6:30am – 4:00pm</span></div>
+        <div class="hours-row"><span>Saturday</span><span>7:00am – 3:00pm</span></div>
+        <div class="hours-row"><span>Sunday</span><span>7:30am – 2:00pm</span></div>
+        <div class="hours-row"><span>Public holidays</span><span>Closed</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <span class="brand">Ashfall Coffee Co.</span>
+      <ul class="footer-links">
+        <li><a href="#origin">Origin</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#process">Roast</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </div>
+    <p class="footer-fine">© 2026 Ashfall Coffee Co., Fitzroy, Melbourne. Roasted on volcanic time.</p>
+  </div>
+</footer>
+
+<script>
+  // Ambient ember particles in hero
+  (function(){
+    var field = document.getElementById('emberField');
+    if(!field) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce) return;
+    var count = 22;
+    for(var i=0;i<count;i++){
+      var s = document.createElement('span');
+      s.className = 'ember-spark';
+      s.style.left = (Math.random()*100) + '%';
+      s.style.animationDelay = (Math.random()*9) + 's';
+      s.style.animationDuration = (7 + Math.random()*6) + 's';
+      s.style.opacity = 0.3 + Math.random()*0.6;
+      field.appendChild(s);
+    }
+  })();
+</script>
+
+</body>
+</html>
